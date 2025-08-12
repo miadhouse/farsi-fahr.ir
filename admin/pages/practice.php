@@ -523,8 +523,8 @@ foreach ($zusatzstoff_main as $cat) {
         function browseQuestions() {
             if (selectedCategoryId) {
                 const url = selectedType === 'subcategory' 
-                    ? `test .php?id=${selectedCategoryId}` 
-                    : `test .php?id=${selectedCategoryId}`;
+                    ? `test.php?subcategory_id=${selectedCategoryId}` 
+                    : `test.php?category_id=${selectedCategoryId}`;
                 window.location.href = url;
             }
         }
