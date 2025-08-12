@@ -1,6 +1,4 @@
 <?php
-
-
 // Get main categories
 $grundstoff_main = getCategories($pdo, 1, 0);
 $zusatzstoff_main = getCategories($pdo, 2, 1);
@@ -175,11 +173,7 @@ foreach ($zusatzstoff_main as $cat) {
                     </div>
                 </div>
             </div>
-                 <div class="w-100 ce" style="    position: fixed !important;
-    bottom: 0 !important;
-    right: 0;
-    z-index: 9999;
-}">
+            <div class="w-100 ce" style="position: fixed !important; bottom: 0 !important; right: 0; z-index: 9999;">
                 <div class="category-footer" id="categoryFooter" style="display: none;">
                     <div class="selected-category-info">
                         <h4 id="selectedCategoryTitle">دسته‌بندی انتخابی</h4>
@@ -188,13 +182,9 @@ foreach ($zusatzstoff_main as $cat) {
                         </div>
                     </div>
                     <div class="category-actions">
-                        <button class="btn-browse" id="browseQuestionsBtn" onclick="browseQuestions()">
-                            <i class="fas fa-list"></i>
-                            مرور سوالات
-                        </button>
-                        <button class="btn-practice" id="practiceBtn" onclick="startPractice()">
-                            <i class="fas fa-play"></i>
-                            تمرین
+                        <button class="btn-select-questions" id="selectQuestionsBtn" onclick="openQuestionsModal()">
+                            <i class="fas fa-tasks"></i>
+                            انتخاب سوالات
                         </button>
                         <button class="btn-clear" onclick="clearSelection()">
                             <i class="fas fa-times"></i>
@@ -209,10 +199,79 @@ foreach ($zusatzstoff_main as $cat) {
                         لطفا برای شروع یک دسته‌بندی را انتخاب کنید!
                     </div>
                 </div>
+            </div>
         </div>
+    </div>
+    
+    <!-- Questions Selection Modal -->
+    <div class="modal fade" id="questionsModal" tabindex="-1" aria-labelledby="questionsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex justify-content-between w-100">
+                        <h5 class="modal-title" id="questionsModalLabel">انتخاب سوالات</h5>
+                        <div class="modal-actions">
+                            <button class="btn btn-info btn-sm me-2" id="browseQuestionsBtn" onclick="browseQuestions()">
+                                <i class="fas fa-list"></i>
+                                مرور سوالات
+                            </button>
+                            <button class="btn btn-success btn-sm" id="practiceBtn" onclick="startPractice()">
+                                <i class="fas fa-play"></i>
+                                تمرین
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <span class="badge bg-primary" id="selectedQuestionsCount">0</span>
+                            سوال انتخاب شده از 
+                            <span class="badge bg-secondary" id="totalQuestionsCount">0</span>
+                            سوال
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-primary btn-sm" onclick="selectAllQuestions()">
+                                <i class="fas fa-check-double"></i>
+                                انتخاب همه
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm ms-1" onclick="deselectAllQuestions()">
+                                <i class="fas fa-times"></i>
+                                حذف انتخاب همه
+                            </button>
+                        </div>
+                    </div>
+                    <div id="questionsContainer">
+                        <div class="text-center p-4">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">در حال بارگذاری...</span>
+                            </div>
+                            <div class="mt-2">در حال بارگذاری سوالات...</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-flex justify-content-between w-100">
+                        <div class="selected-info">
+                            <span class="text-muted">
+                                <span id="footerSelectedCount">0</span> سوال انتخاب شده
+                            </span>
+                        </div>
+                        <div>
+                            <button class="btn btn-info me-2" onclick="browseQuestions()">
+                                <i class="fas fa-list"></i>
+                                مرور سوالات
+                            </button>
+                            <button class="btn btn-success" onclick="startPractice()">
+                                <i class="fas fa-play"></i>
+                                تمرین
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-       
     </div>
     
     <style>
@@ -260,23 +319,12 @@ foreach ($zusatzstoff_main as $cat) {
             gap: 8px;
         }
 
-        .btn-browse {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-browse:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .btn-practice {
+        .btn-select-questions {
             background: #10b981;
             color: white;
         }
 
-        .btn-practice:hover {
+        .btn-select-questions:hover {
             background: #059669;
             transform: translateY(-2px);
         }
@@ -367,6 +415,37 @@ foreach ($zusatzstoff_main as $cat) {
             color: white;
         }
 
+        /* Modal Styles */
+        .modal-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-check {
+            padding: 10px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .form-check:hover {
+            background-color: #f8f9fa;
+        }
+
+        .form-check-input:checked {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+
+        .selected-info {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        #questionsContainer {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
         @media (max-width: 768px) {
             .category-footer {
                 flex-direction: column;
@@ -382,6 +461,21 @@ foreach ($zusatzstoff_main as $cat) {
             .category-actions button {
                 flex: 1;
                 min-width: 120px;
+            }
+
+            .modal-header .d-flex {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .modal-actions {
+                justify-content: center;
+            }
+
+            .modal-footer .d-flex {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
             }
         }
     </style>
@@ -414,6 +508,7 @@ foreach ($zusatzstoff_main as $cat) {
         let selectedCategoryTitle = '';
         let selectedQuestionCount = 0;
         let selectedType = ''; // 'category' or 'subcategory'
+        let loadedQuestions = [];
 
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
@@ -446,7 +541,6 @@ foreach ($zusatzstoff_main as $cat) {
                     selectedType = categoryData.type;
                     
                     updateFooterDisplay();
-                    // Don't auto-highlight/expand on page load to keep interface clean
                 } catch (e) {
                     console.error('خطا در بارگذاری دسته‌بندی ذخیره شده:', e);
                     deleteCookie('selectedCategory');
@@ -483,17 +577,6 @@ foreach ($zusatzstoff_main as $cat) {
             }
         }
 
-        // Highlight selected category
-        function highlightSelectedCategory() {
-            // Remove previous selections (but don't change accordion colors)
-            document.querySelectorAll('.category-item, .subcategory-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-
-            // We don't need to highlight anything visually since the selection is shown in footer
-            // The accordion expansion state is handled separately
-        }
-
         // Select category function
         function selectCategory(id, title, questionCount, type) {
             selectedCategoryId = id;
@@ -515,27 +598,151 @@ foreach ($zusatzstoff_main as $cat) {
             updateFooterDisplay();
             deleteCookie('selectedCategory');
             
-            // Close all accordions when clearing selection
             closeAllAccordions();
         }
 
-        // Navigation functions
-        function browseQuestions() {
-            if (selectedCategoryId) {
-                const url = selectedType === 'subcategory' 
-                    ? `test.php?subcategory_id=${selectedCategoryId}` 
-                    : `test.php?category_id=${selectedCategoryId}`;
-                window.location.href = url;
-            }
+        // Open questions modal
+        function openQuestionsModal() {
+            if (!selectedCategoryId) return;
+
+            const modal = new bootstrap.Modal(document.getElementById('questionsModal'));
+            const modalTitle = document.getElementById('questionsModalLabel');
+            modalTitle.textContent = `انتخاب سوالات - ${selectedCategoryTitle}`;
+            
+            modal.show();
+            loadQuestions();
         }
 
-        function startPractice() {
-            if (selectedCategoryId) {
-                const url = selectedType === 'subcategory'
-                    ? `test.php?subcategory_id=${selectedCategoryId}`
-                    : `test.php?category_id=${selectedCategoryId}`;
-                window.location.href = url;
+        // Load questions via AJAX
+        function loadQuestions() {
+            const container = document.getElementById('questionsContainer');
+            
+            // Show loading spinner
+            container.innerHTML = `
+                <div class="text-center p-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">در حال بارگذاری...</span>
+                    </div>
+                    <div class="mt-2">در حال بارگذاری سوالات...</div>
+                </div>
+            `;
+
+            const url = selectedType === 'subcategory' 
+                ? `pages/load_questions.php?subcategory_id=${selectedCategoryId}` 
+                : `pages/load_questions.php?category_id=${selectedCategoryId}`;
+
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    container.innerHTML = data;
+                    updateQuestionCounts();
+                    setupQuestionCheckboxes();
+                })
+                .catch(error => {
+                    console.error('خطا در بارگذاری سوالات:', error);
+                    container.innerHTML = `
+                        <div class="alert alert-danger text-center">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            خطا در بارگذاری سوالات. لطفا دوباره تلاش کنید.
+                        </div>
+                    `;
+                });
+        }
+
+        // Setup question checkboxes
+        function setupQuestionCheckboxes() {
+            const checkboxes = document.querySelectorAll('#questionsContainer input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateQuestionCounts);
+            });
+        }
+
+        // Update question counts
+        function updateQuestionCounts() {
+            const checkboxes = document.querySelectorAll('#questionsContainer input[type="checkbox"]');
+            const selectedCheckboxes = document.querySelectorAll('#questionsContainer input[type="checkbox"]:checked');
+            
+            const totalCount = checkboxes.length;
+            const selectedCount = selectedCheckboxes.length;
+            
+            document.getElementById('totalQuestionsCount').textContent = totalCount;
+            document.getElementById('selectedQuestionsCount').textContent = selectedCount;
+            document.getElementById('footerSelectedCount').textContent = selectedCount;
+        }
+
+        // Select all questions
+        function selectAllQuestions() {
+            const checkboxes = document.querySelectorAll('#questionsContainer input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = true;
+            });
+            updateQuestionCounts();
+        }
+
+        // Deselect all questions
+        function deselectAllQuestions() {
+            const checkboxes = document.querySelectorAll('#questionsContainer input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            updateQuestionCounts();
+        }
+
+        // Get selected question IDs
+        function getSelectedQuestionIds() {
+            const selectedCheckboxes = document.querySelectorAll('#questionsContainer input[type="checkbox"]:checked');
+            return Array.from(selectedCheckboxes).map(checkbox => checkbox.id);
+        }
+
+        // Navigate to test page with selected questions
+        function navigateToTest(mode = 'browse') {
+            const selectedQuestions = getSelectedQuestionIds();
+            
+            if (selectedQuestions.length === 0) {
+                alert('لطفا حداقل یک سوال را انتخاب کنید.');
+                return;
             }
+
+            // Create a form and submit it
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'test.php';
+            
+            // Add selected questions as hidden inputs
+            selectedQuestions.forEach(questionId => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'selected_questions[]';
+                input.value = questionId;
+                form.appendChild(input);
+            });
+            
+            // Add mode parameter
+            const modeInput = document.createElement('input');
+            modeInput.type = 'hidden';
+            modeInput.name = 'mode';
+            modeInput.value = mode;
+            form.appendChild(modeInput);
+            
+            // Add category info
+            const categoryInput = document.createElement('input');
+            categoryInput.type = 'hidden';
+            categoryInput.name = selectedType === 'subcategory' ? 'subcategory_id' : 'category_id';
+            categoryInput.value = selectedCategoryId;
+            form.appendChild(categoryInput);
+            
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        // Browse questions function
+        function browseQuestions() {
+            navigateToTest('browse');
+        }
+
+        // Start practice function
+        function startPractice() {
+            navigateToTest('practice');
         }
 
         // Function to close all accordions
@@ -559,33 +766,25 @@ foreach ($zusatzstoff_main as $cat) {
                 const questionCount = parseInt(this.getAttribute('data-question-count'));
                 const subcategoriesDiv = document.getElementById('sub-' + categoryId);
                 
-                // Check if clicked on arrow (expand/collapse) or on the category itself
                 const isArrowClick = e.target.classList.contains('arrow') || 
                                    e.target.closest('.arrow');
                 
                 if (isArrowClick && subcategoriesDiv) {
-                    // Toggle expanded state when clicking arrow only
                     const isExpanded = subcategoriesDiv.classList.contains('expanded');
                     
                     if (isExpanded) {
-                        // Collapse this accordion
                         subcategoriesDiv.classList.remove('expanded');
                         this.classList.remove('expanded');
                     } else {
-                        // Close all other accordions first
                         closeAllAccordions();
-                        // Expand this accordion
                         subcategoriesDiv.classList.add('expanded');
                         this.classList.add('expanded');
                     }
                 } else {
-                    // Select category and expand accordion when clicking on the category content
                     selectCategory(categoryId, categoryTitle, questionCount, 'category');
                     
-                    // Close all other accordions first
                     closeAllAccordions();
                     
-                    // Expand this category's accordion
                     if (subcategoriesDiv) {
                         subcategoriesDiv.classList.add('expanded');
                         this.classList.add('expanded');
@@ -665,4 +864,3 @@ foreach ($zusatzstoff_main as $cat) {
     </script>
     
 </div>
-<!-- Category Footer -->
