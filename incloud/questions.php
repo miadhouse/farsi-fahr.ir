@@ -1,4 +1,5 @@
 <?php
+//incloud/questions.php
 require_once __DIR__ . '/../config/config.php';
 
 function getQuestions($pdo, $cat2id=null)
@@ -69,30 +70,4 @@ function getRootCategoryQuestions($pdo, $rootCatId = null) {
         }
     }
     return $questionArr;
-}
-function loadQuestions($pdo, $questionIds = null) {
-    if ($questionIds === null || !is_array($questionIds) || count($questionIds) === 0) {
-        return [];
-    }
-
-    // تبدیل همه IDها به عدد برای امنیت
-    $questionIds = array_map('intval', $questionIds);
-
-    $in  = str_repeat('?,', count($questionIds) - 1) . '?';
-    $sql = "
-        SELECT *
-        FROM questions
-        WHERE id IN ($in)
-          AND (
-              classes IS NULL
-              OR classes = ''
-              OR FIND_IN_SET('6', REPLACE(REPLACE(classes, '[', ''), ']', '')) > 0
-          )
-          AND NOT (basic = 0 AND basic_mofa = 1)
-    ";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($questionIds);
-
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

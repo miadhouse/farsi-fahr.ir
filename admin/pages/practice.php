@@ -706,7 +706,7 @@ foreach ($zusatzstoff_main as $cat) {
             // Create a form and submit it
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'test.php';
+            form.action = '../app/index.php';
             
             // Add selected questions as hidden inputs
             selectedQuestions.forEach(questionId => {
