@@ -105,9 +105,10 @@ $currentQuestion = $selectedQuestions[$currentQuestionIndex];
             cursor: pointer;
             display: inline-block
         }
+
         .form-label {
-    margin-bottom: 1.2rem;
-}
+            margin-bottom: 1.2rem;
+        }
     </style>
 </head>
 
@@ -115,43 +116,24 @@ $currentQuestion = $selectedQuestions[$currentQuestionIndex];
     <div class="container" style="height: 100%;">
         <div class="text-white bg-success d-flex justify-content-between align-items-center p-2 px-4"
             style="border-bottom-right-radius: 30px;border-bottom-left-radius: 30px;position: sticky;top: 0;">
-            <div class="d-flex align-items-center"><i class="fas fa-info-circle me-2"></i><span
-                    id="code">1.1.01-001</span></div>
+            <div class="d-flex align-items-center"><i class="fas fa-info-circle me-2"></i><span id="code"></span></div>
             <a class="fas fa-adjust fa-lightbulb-o" style="font-size: 20px;">راهنما</a><span>Punkte: <span
-                    id="punkt">4</span></span>
+                    id="punkt"></span></span>
         </div>
         <div class="mt-4 p-4" style="height: 100%;/*float: none;*/display: in;">
-            <h1 id="text" class="fw-bold h5 mb-4">Was versteht man unter defensivem Fahren?</h1>
+            <h1 id="text" class="fw-bold h5 mb-4 question-text"></h1>
             <div class="row">
-                <div class="col-12 col-md-6">
-                    <!-- اگر سوال تصویری یا ویدیویی بود <img width="100%" src="assets/Gemeinde der Goldenen Lichter.jpg" alt=""> -->
+                <div class="col-12 col-md-6 " id="media">
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="d-flex flex-column gap-3">
                         <div class="d-flex align-items-center">
                             <span id="common_text"><!-- اگر موجود بود --> </span>
                         </div>
-                        <div class="d-flex align-items-center"><label class="form-label me-2 custom-checkbox"><input
-                                    type="checkbox" class="checkbox"><span class="checkmark"></span></label><span
-                                name="text" status="richtig">Vorsorglich an jeder Kreuzung anhalten</span>
-                            <span class="d-none" name="help_text">متن راهنمای اگر موجود بود در صورت پاسخ به سوال نمایش
-                                داده شود</span>
-                        </div>
-                        <div name="text" class="d-flex align-items-center"><label
-                                class="form-label me-2 custom-checkbox"><input type="checkbox" class="checkbox"><span
-                                    class="checkmark"></span></label><span name="text" status="false">Nicht
-                                auf dem eigenen Recht bestehen</span>
-                            <span name="help_text" class="d-none">متن راهنمای اگر موجود بود در صورت پاسخ به سوال نمایش
-                                داده شود</span>
-                        </div>
-                        <div name="text" class="d-flex align-items-center"><label
-                                class="form-label me-2 custom-checkbox"><input type="checkbox" class="checkbox"><span
-                                    class="checkmark"></span></label><span name="text" status="false">Vorsorglich an
-                                jeder Kreuzung anhalten</span>
-                            <span class="d-none" name="help_text">متن راهنمای اگر موجود بود در صورت پاسخ به سوال نمایش
-                                داده شود</span>
+                        <div id="answers">
 
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -161,7 +143,7 @@ $currentQuestion = $selectedQuestions[$currentQuestionIndex];
             <div class="d-flex align-items-center"></div>
             <div class="row px-4 py-2">
                 <div class="col-4 fw-bold text-start p-0">
-                                        <span class="badge bg-warning text-dark"> سوال ها: <?= $totalQuestions ?></span>
+                    <span class="badge bg-warning text-dark"> سوال ها: <?= $totalQuestions ?></span>
 
                     <span>صفحه <?= $currentPage ?> از <?= $totalPages ?></span>
                 </div>
@@ -183,7 +165,6 @@ $currentQuestion = $selectedQuestions[$currentQuestionIndex];
                 </button>
                 <div class="d-md-block d-flex gap-1">
                     <?php
-                    // نمایش دکمه‌های صفحه فعلی (10 سوال)
                     for ($i = $startIndex; $i <= $endIndex; $i++) {
                         $questionNumber = $i + 1;
                         $isActive = ($i == $currentQuestionIndex) ? 'btn-dark' : 'btn-success';
@@ -208,26 +189,24 @@ $currentQuestion = $selectedQuestions[$currentQuestionIndex];
     <script>
         const selectedQuestions = <?= json_encode($selectedQuestions) ?>;
         let currentQuestionIndex = <?= $currentQuestionIndex ?>;
-let questionsPerPage;
+        let questionsPerPage;
 
-function updateQuestionsPerPage() {
-    const width = window.innerWidth;
-    if (width >= 992) {       // دسکتاپ
-        questionsPerPage = 10;
-    } else if (width >= 768) { // تبلت
-        questionsPerPage = 5;
-    } else {                  // موبایل
-        questionsPerPage = 1;
-    }
-}
+        function updateQuestionsPerPage() {
+            const width = window.innerWidth;
+            if (width >= 992) {       // دسکتاپ
+                questionsPerPage = 20;
+            } else if (width >= 768) { // تبلت
+                questionsPerPage = 10;
+            } else {                  // موبایل
+                questionsPerPage = 5;
+            }
+        }
         document.addEventListener("DOMContentLoaded", function () {
-                updateQuestionsPerPage(); // تنظیم تعداد سوالات در بارگذاری اولیه
-    loadCurrentQuestion();
-    renderPageButtons();
+            loadCurrentQuestion();
+            renderPageButtons();
         });
         window.addEventListener('resize', () => {
-                updateQuestionsPerPage();
-    renderPageButtons();
+            renderPageButtons();
         });
         function loadCurrentQuestion() {
             const questionId = selectedQuestions[currentQuestionIndex];
@@ -241,8 +220,7 @@ function updateQuestionsPerPage() {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
-                    // اینجا داده‌های سوال را در صفحه بارگذاری کنید
+                    console.log(data['question']['picture']);
                     updateQuestionDisplay(data);
 
                     // به‌روزرسانی session
@@ -252,12 +230,53 @@ function updateQuestionsPerPage() {
                     console.error("خطا:", error);
                 });
         }
-
+        let imageUrl = '';
+        let videoUrl = '';
         function updateQuestionDisplay(data) {
-            // اینجا کد مربوط به نمایش سوال را بنویسید
-            // مثال:
-            // document.getElementById("text").innerText = data.question_text;
-            // document.getElementById("code").innerText = data.question_code;
+            const fileName = data['question']['picture'] || '';
+const extension = fileName.split('.').pop().toLowerCase();
+
+if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension)) {
+    imageUrl = 'https://t24.theorie24.de/2025-01-v400/data/img/images/' + fileName;
+    document.getElementById("media").innerHTML = '<img id="image" src="' + imageUrl + '" alt="" class="w-100">';
+} else if (['mp4', 'm4v', 'webm'].includes(extension)) {
+    videoUrl = 'https://www.theorie24.de/live_images/_current_ws_2024-10-01_2025-04-01/videos/' + fileName;
+    document.getElementById("media").innerHTML = '<video id="video" src="' + videoUrl + '" controls class="w-100"></video>';
+} else {
+    document.getElementById("media").innerHTML = ''; // فایل نامعتبر یا خالی
+}
+
+            document.getElementById("text").innerText = data['question']['text'];
+            document.getElementById("code").innerText = data['question']['number'];
+            document.getElementById("punkt").innerText = data['question']['points'];
+            answerBuilder(data['answers']);
+        }
+
+        function answerBuilder(answers = null) {
+            if (answers) {
+                let answersText = "";
+                let status = "";
+                console.log(answers);
+                answers.forEach(answer => {
+                    if (answer['asw_corr'] == 1) {
+                        status = 'checked';
+                    } else {
+                        status = '';
+                    }
+                    answersText += '<div class="d-flex mb-5  align-items-center">' +
+                        '<label class="form-label me-2 custom-checkbox">' +
+                        '<input type="checkbox" class="checkbox" ' + status + '>' +
+                        '<span class="checkmark"></span>' +
+                        '</label>' +
+                        '<span class="fw-bold" name="text" status="richtig">' + answer['text'] + '</span>' +
+                        '<span class="d-none" name="help_text"></span>' +
+                        '</div>';
+                });
+                document.getElementById("answers").innerHTML = answersText;
+            } else {
+                console.log('خطا در استخراج پاسخ');
+                return "";
+            }
         }
 
         function updateSession(questionId) {
@@ -297,13 +316,13 @@ function updateQuestionsPerPage() {
             function getQuestionsPerPage() {
                 if (window.innerWidth < 768) {
                     // موبایل
-                    return 3;
+                    return 5;
                 } else if (window.innerWidth < 992) {
                     // تبلت
-                    return 5;
+                    return 10;
                 } else {
                     // دسکتاپ
-                    return 10;
+                    return 15;
                 }
             }
             const questionsPerPage = getQuestionsPerPage();

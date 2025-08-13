@@ -212,33 +212,31 @@ foreach ($zusatzstoff_main as $cat) {
                         <h5 class="modal-title" id="questionsModalLabel">انتخاب سوالات</h5>
                         <div class="modal-actions">
                             <button class="btn btn-info btn-sm me-2" id="browseQuestionsBtn" onclick="browseQuestions()">
-                                <i class="fas fa-list"></i>
+                                <i class="fas fa-list mx-1"></i>
                                 مرور سوالات
                             </button>
                             <button class="btn btn-success btn-sm" id="practiceBtn" onclick="startPractice()">
-                                <i class="fas fa-play"></i>
+                                <i class="fas fa-play mx-1"></i>
                                 تمرین
                             </button>
                         </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-2">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div>
-                            <span class="badge bg-primary" id="selectedQuestionsCount">0</span>
+                        <div class="fs-6">
+                            <span class="badge bg-primary p-1" id="selectedQuestionsCount">0</span>
                             سوال انتخاب شده از 
-                            <span class="badge bg-secondary" id="totalQuestionsCount">0</span>
+                            <span class="badge bg-secondary p-1" id="totalQuestionsCount">0</span>
                             سوال
                         </div>
                         <div>
-                            <button class="btn btn-outline-primary btn-sm" onclick="selectAllQuestions()">
-                                <i class="fas fa-check-double"></i>
-                                انتخاب همه
+                            <button class="btn p-1 btn-sm btn-outline-primary btn-sm" onclick="selectAllQuestions()">
+                                <i class="fas fa-check-double mx-1"></i>
                             </button>
-                            <button class="btn btn-outline-secondary btn-sm ms-1" onclick="deselectAllQuestions()">
-                                <i class="fas fa-times"></i>
-                                حذف انتخاب همه
+                            <button class="btn p-1 btn-sm btn-outline-secondary btn-sm ms-1" onclick="deselectAllQuestions()">
+                                <i class="fas fa-times mx-1"></i>
                             </button>
                         </div>
                     </div>
@@ -260,11 +258,11 @@ foreach ($zusatzstoff_main as $cat) {
                         </div>
                         <div>
                             <button class="btn btn-info me-2" onclick="browseQuestions()">
-                                <i class="fas fa-list"></i>
+                                <i class="fas fa-list mx-1"></i>
                                 مرور سوالات
                             </button>
                             <button class="btn btn-success" onclick="startPractice()">
-                                <i class="fas fa-play"></i>
+                                <i class="fas fa-play mx-1"></i>
                                 تمرین
                             </button>
                         </div>
@@ -601,18 +599,31 @@ foreach ($zusatzstoff_main as $cat) {
             closeAllAccordions();
         }
 
-        // Open questions modal
-        function openQuestionsModal() {
-            if (!selectedCategoryId) return;
+       // Open questions modal
+function openQuestionsModal() {
+    if (!selectedCategoryId) return;
 
-            const modal = new bootstrap.Modal(document.getElementById('questionsModal'));
-            const modalTitle = document.getElementById('questionsModalLabel');
-            modalTitle.textContent = `انتخاب سوالات - ${selectedCategoryTitle}`;
-            
-            modal.show();
-            loadQuestions();
-        }
+    const modalElement = document.getElementById('questionsModal');
+    const modal = new bootstrap.Modal(modalElement);
+    const modalTitle = document.getElementById('questionsModalLabel');
+    
+    modalTitle.textContent = `انتخاب سوالات - ${selectedCategoryTitle}`;
+    
+    // Show the modal
+    modal.show();
+    
+    // Add event listeners to the modal element, not the Modal instance
+    modalElement.addEventListener('shown.bs.modal', () => {
+        document.getElementById('categoryFooter').hidden= true;;
+    });
+    
+    modalElement.addEventListener('hidden.bs.modal', () => {
+                document.getElementById('categoryFooter').hidden= false;;
 
+    });
+    
+    loadQuestions();
+}
         // Load questions via AJAX
         function loadQuestions() {
             const container = document.getElementById('questionsContainer');

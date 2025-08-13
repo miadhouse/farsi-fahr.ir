@@ -32,13 +32,13 @@ try {
 
     // Display questions count header
     echo '<div class="questions-header mb-3">';
-    echo '<div class="alert alert-info d-flex justify-content-between align-items-center">';
-    echo '<div>';
-    echo '<i class="fas fa-list-ul me-2"></i>';
-    echo '<strong>' . count($questions) . '</strong> سوال یافت شد';
-    echo '</div>';
-    echo '<div class="text-muted small">همه سوالات به صورت پیش‌فرض انتخاب شده‌اند</div>';
-    echo '</div>';
+    // echo '<div class="alert alert-info d-flex justify-content-between align-items-center">';
+    // echo '<div>';
+    // echo '<i class="fas fa-list-ul me-2"></i>';
+    // echo '<strong>' . count($questions) . '</strong> سوال یافت شد';
+    // echo '</div>';
+    // echo '<div class="text-muted small">همه سوالات به صورت پیش‌فرض انتخاب شده‌اند</div>';
+    // echo '</div>';
     echo '</div>';
 
     // Display questions with checkboxes
@@ -49,14 +49,14 @@ try {
         $questionId = htmlspecialchars($question['id']);
         $questionText = htmlspecialchars($question['text']);
         
-        echo '<div class="form-check form-check-primary mt-3 question-item">';
-        echo '<input class="form-check-input" type="checkbox" value="' . $questionId . '" id="' . $questionId . '" checked>';
+        echo '<div class="form-check modal-bg form-check-primary mt-3 question-item">';
+        echo '<input style="margin-right: -1.4em;" class="form-check-input " type="checkbox" value="' . $questionId . '" id="' . $questionId . '" checked>';
         echo '<label class="form-check-label" for="' . $questionId . '">';
         echo '<div class="question-content">';
-        echo '<div class="question-number">';
-        echo '<span class="badge bg-secondary me-2">' . $questionNumber . '</span>';
-        echo '</div>';
-        echo '<div class="question-text">' . $questionText . '</div>';
+        // echo '<div class="question-number">';
+        // echo '<span class="badge bg-secondary me-2">' . $questionNumber . '</span>';
+        // echo '</div>';
+        echo '<div class="question-text fs-6 small-tex text-bg-darkt">' . $questionText . '</div>';
         echo '</div>';
         echo '</label>';
         echo '</div>';
@@ -86,7 +86,6 @@ try {
     padding: 15px;
     margin-bottom: 10px;
     transition: all 0.2s ease;
-    background: #fff;
 }
 
 .question-item:hover {
@@ -96,7 +95,7 @@ try {
 }
 
 .question-item:has(input:checked) {
-    background-color: #e7f3ff;
+    background-color: #86b7fe;
     border-color: #0d6efd;
 }
 

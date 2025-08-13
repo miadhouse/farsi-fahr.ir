@@ -40,25 +40,15 @@ try {
     if (!$question) {
         echo json_encode([
             'success' => false,
-            'message' => $questionId
+            'message' => 'سوالی جهت نمایش وجود ندارد'
         ]);
         exit;
     }
 
-    if (!empty($question['image'])) {
-        $question['image'] = 'assets/images/' . $question['image'];
-    }
-
-    if (!empty($question['video'])) {
-
-        $question['video'] = 'assets/videos/' . $question['video'];
-    }
-
-
-
     echo json_encode([
         'success' => true,
         'question' => $question,
+        'answers' => getAnswers( $pdo, $questionId),
         'message' => 'سوال با موفقیت بارگذاری شد'
     ]);
 
@@ -75,4 +65,42 @@ try {
         'message' => 'خطای سیستمی رخ داده است'
     ]);
 }
-?>
+
+function getAnswers(PDO $pdo, $questionId) {
+    try {
+ 
+    $stmt = $pdo->prepare("
+        SELECT 
+           *
+        FROM answers 
+        WHERE question_id = :question_id
+    ");
+
+    $stmt->bindValue(':question_id', (int) $questionId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $answers = $stmt->fetchAll();
+
+    if (!$answers) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'پاسخی جهت نمایش وجود ندارد'
+        ]);
+        exit;
+    }
+    return $answers;
+
+} catch (PDOException $e) {
+    error_log("Database error in get_question.php: " . $e->getMessage());
+    echo json_encode([
+        'success' => false,
+        'message' => $e->getMessage()
+    ]);
+} catch (Exception $e) {
+    error_log("General error in get_question.php: " . $e->getMessage());
+    echo json_encode([
+        'success' => false,
+        'message' => 'خطای سیستمی رخ داده است'
+    ]);
+}
+}
