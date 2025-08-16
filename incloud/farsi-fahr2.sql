@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 12, 2025 at 03:00 PM
+-- Generation Time: Aug 16, 2025 at 05:57 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -842,9 +842,9 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw
 (776, 269, '25', 2, 1, 'm'),
 (777, 270, '15', 2, 1, 'm'),
 (778, 271, '25', 2, 1, 'm'),
-(779, 272, '', 1, 1, ''),
-(780, 272, '', 1, 0, ''),
-(781, 272, '', 1, 0, ''),
+(779, 272, '<img src=\"https://t24.theorie24.de/2025-01-v400/data/img/etc/de/div100div2.png\">', 1, 1, ''),
+(780, 272, '<img src=\"https://t24.theorie24.de/2025-01-v400/data/img/etc/de/div10mult5div2.png\">', 1, 0, ''),
+(781, 272, '<img src=\"https://t24.theorie24.de/2025-01-v400/data/img/etc/de/div10mult3div2.png\">', 1, 0, ''),
 (782, 273, '12,5 m', 1, 1, ''),
 (783, 273, '11,0 m', 1, 0, ''),
 (784, 273, '9,5 m', 1, 0, ''),
@@ -871,10 +871,10 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw
 (805, 286, 'Auf Ihrem Fahrstreifen hinter dem letzten Pkw warten', 1, 1, ''),
 (806, 286, 'An den wartenden Pkws rechts vorbei bis zur Haltlinie fahren', 1, 0, ''),
 (807, 286, 'An den wartenden Pkws links vorbei bis zur Haltlinie fahren', 1, 0, ''),
-(808, 287, '3,5', 2, 1, 't zul&auml;ssiger Gesamtmasse'),
-(809, 288, 'Nur abbiegen, wenn der Gegenverkehr durch das Ausschwenken des Pfluges nicht gefährdet wird', 1, 1, ''),
-(810, 288, 'Wenn der Pflug mit Warntafeln kenntlich gemacht ist, kann beim Abbiegen niemand gefährdet werden', 1, 0, '');
+(808, 287, '3,5', 2, 1, 't zul&auml;ssiger Gesamtmasse');
 INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw_hint`) VALUES
+(809, 288, 'Nur abbiegen, wenn der Gegenverkehr durch das Ausschwenken des Pfluges nicht gefährdet wird', 1, 1, ''),
+(810, 288, 'Wenn der Pflug mit Warntafeln kenntlich gemacht ist, kann beim Abbiegen niemand gefährdet werden', 1, 0, ''),
 (811, 289, 'Nachfolgende Fahrzeuge, die überholen wollen', 1, 1, ''),
 (812, 289, 'Fahrzeuge, die sich links neben Ihnen eingeordnet haben', 1, 1, ''),
 (813, 289, 'Rechts parkende Fahrzeuge', 1, 0, ''),
@@ -1632,10 +1632,10 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw
 (1565, 554, 'ALB passt die Bremskraft automatisch dem Fahrbahnzustand an', 1, 0, ''),
 (1566, 555, 'Durch Federkraft', 1, 1, ''),
 (1567, 555, 'Durch einströmende Druckluft', 1, 0, ''),
-(1568, 555, 'Durch die Betätigungskraft des Fahrers', 1, 0, ''),
-(1569, 556, 'Beim Betätigen des Handbremsventils wird der Federspeicher-Bremszylinder entlüftet. Dabei bewirkt die Federkraft die Bremsung', 1, 1, ''),
-(1570, 556, 'Beim Betätigen des Handbremsventils strömt Druckluft in den Federspeicher-Bremszylinder. Dabei bewirkt die Druckluft die Bremsung', 1, 0, '');
+(1568, 555, 'Durch die Betätigungskraft des Fahrers', 1, 0, '');
 INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw_hint`) VALUES
+(1569, 556, 'Beim Betätigen des Handbremsventils wird der Federspeicher-Bremszylinder entlüftet. Dabei bewirkt die Federkraft die Bremsung', 1, 1, ''),
+(1570, 556, 'Beim Betätigen des Handbremsventils strömt Druckluft in den Federspeicher-Bremszylinder. Dabei bewirkt die Druckluft die Bremsung', 1, 0, ''),
 (1571, 556, 'Beim Betätigen des Bremspedals im Stand strömt Druckluft in den Federspeicher-Bremszylinder. Dabei bewirkt die Druckluft die Bremsung', 1, 0, ''),
 (1572, 557, 'Die Federspeicher-Bremse reagiert nicht auf das Betätigen des Handbremsventils', 1, 1, ''),
 (1573, 557, 'Um das Fahrzeug abschleppen zu können, muss die Federspeicher-Bremse mit der Hilfslöseeinrichtung gelöst werden', 1, 1, ''),
@@ -2376,11 +2376,11 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw
 (2308, 808, '- Erdgastankstelle', 1, 0, ''),
 (2309, 808, '- Wasserstofftankstelle', 1, 0, ''),
 (2310, 809, 'Auf eine Ladestation für Elektrofahrzeuge', 1, 1, ''),
-(2311, 809, 'Auf Explosionsgefahr an einer Tankstelle durch Elektrogeräte', 1, 0, ''),
+(2311, 809, 'Auf Explosionsgefahr an einer Tankstelle durch Elektrogeräte', 1, 0, '');
+INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw_hint`) VALUES
 (2312, 809, 'Auf die Möglichkeit zum Aufladen von Mobiltelefonen', 1, 0, ''),
 (2313, 810, 'Auf einen Parkplatz mit Anschluss an öffentliche Verkehrsmittel („Parken + Reisen“)', 1, 1, ''),
-(2314, 810, 'Auf eine Tankstelle mit Waschanlage („Pflegen + Reinigen“)', 1, 0, '');
-INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw_hint`) VALUES
+(2314, 810, 'Auf eine Tankstelle mit Waschanlage („Pflegen + Reinigen“)', 1, 0, ''),
 (2315, 810, 'Auf einen Fahrzeugverleih mit Reparaturwerkstatt („Pannenservice + Reparatur“)', 1, 0, ''),
 (2316, 811, '- der Kraftstoffverbrauch', 1, 1, ''),
 (2317, 811, '- der Reifenverschleiß', 1, 1, ''),
@@ -3119,11 +3119,11 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw
 (3050, 1061, '- Toleranz des Luftdrucks im Reifen', 1, 0, ''),
 (3051, 1062, '- die Tragfähigkeitskennzahl für Einzel- und Zwillingsbereifung', 1, 1, ''),
 (3052, 1062, '- das Verhältnis der Höhe zur Breite', 1, 0, ''),
-(3053, 1062, '- den Abrollumfang in Abhängigkeit vom Luftdruck', 1, 0, ''),
+(3053, 1062, '- den Abrollumfang in Abhängigkeit vom Luftdruck', 1, 0, '');
+INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw_hint`) VALUES
 (3054, 1063, 'Ich halte an der nächsten geeigneten Stelle an und führe eine Sichtprüfung durch', 1, 1, ''),
 (3055, 1063, 'Ich lasse den Schaden bei der nächsten Inspektion beheben', 1, 0, ''),
-(3056, 1063, 'Ich brauche die Anzeige nicht zu beachten, da der andere Zwillingsreifen das Gewicht trägt', 1, 0, '');
-INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw_hint`) VALUES
+(3056, 1063, 'Ich brauche die Anzeige nicht zu beachten, da der andere Zwillingsreifen das Gewicht trägt', 1, 0, ''),
 (3057, 1064, 'Der Fehler im System wird mittels Kontrollleuchte angezeigt', 1, 1, ''),
 (3058, 1064, 'Das Kraftfahrzeug wird mithilfe des pneumatischen Redundanzdrucks gebremst', 1, 1, ''),
 (3059, 1064, 'Das Kraftfahrzeug lässt sich nur noch mit der Feststellbremse abbremsen', 1, 0, ''),
@@ -3850,13 +3850,13 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw
 (3780, 1309, 'Bei schmalen Straßen mit unebener Fahrbahnoberfläche', 1, 0, ''),
 (3781, 1310, '- roten Pkws', 1, 1, ''),
 (3782, 1310, '- blauen Pkws', 1, 0, ''),
-(3783, 1310, '- gelben Traktors', 1, 0, ''),
+(3783, 1310, '- gelben Traktors', 1, 0, '');
+INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw_hint`) VALUES
 (3784, 1311, '- die Geschwindigkeit weiter verringern', 1, 1, ''),
 (3785, 1311, '- bremsbereit sein', 1, 1, ''),
 (3786, 1311, '- eine Gefahrbremsung durchführen', 1, 0, ''),
 (3787, 1312, 'Ich behalte meine Geschwindigkeit bei', 1, 1, ''),
-(3788, 1312, 'Ich überhole, da die Straße frei ist', 1, 0, '');
-INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw_hint`) VALUES
+(3788, 1312, 'Ich überhole, da die Straße frei ist', 1, 0, ''),
 (3789, 1312, 'Ich verringere den Abstand und hupe', 1, 0, ''),
 (3790, 1313, 'Eine mangelnde Verkehrswahrnehmung', 1, 1, ''),
 (3791, 1313, 'Eine hohe Risikobereitschaft', 1, 1, ''),
@@ -4592,14 +4592,14 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw
 (4521, 1567, 'Weil ein Überholverbot ausgeschildert ist', 1, 0, ''),
 (4522, 1568, 'Ich bremse weiter ab', 1, 1, ''),
 (4523, 1568, 'Ich bleibe zunächst auf meinem Fahrstreifen', 1, 1, ''),
-(4524, 1568, 'Ich lenke jetzt nach links', 1, 0, ''),
+(4524, 1568, 'Ich lenke jetzt nach links', 1, 0, '');
+INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw_hint`) VALUES
 (4525, 1569, 'Der gelbe Pkw biegt nach links ab', 1, 1, ''),
 (4526, 1569, 'Ich muss auf meine Vorfahrt verzichten', 1, 1, ''),
 (4527, 1569, 'Die Fußgängerin überquert die Straße', 1, 0, ''),
 (4528, 1570, 'Der Fußgängerin', 1, 1, ''),
 (4529, 1570, 'Dem Radfahrer', 1, 1, ''),
-(4530, 1570, 'Dem Bus', 1, 0, '');
-INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw_hint`) VALUES
+(4530, 1570, 'Dem Bus', 1, 0, ''),
 (4531, 1571, 'Ich gebe beim Notruf die Zahlen auf der orangefarbenen Tafel an', 1, 1, ''),
 (4532, 1571, 'Ich vermeide es, den Bereich mit der ausgelaufenen Flüssigkeit zu betreten', 1, 1, ''),
 (4533, 1571, 'Ich versuche, das Leck am Fahrzeug abzudichten', 1, 0, ''),
@@ -5118,6 +5118,34 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `asw_type`, `asw_corr`, `asw
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bookmarked_questions`
+--
+
+DROP TABLE IF EXISTS `bookmarked_questions`;
+CREATE TABLE IF NOT EXISTS `bookmarked_questions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `question_id` int NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_bookmark` (`user_id`,`question_id`),
+  KEY `idx_user_id` (`user_id`),
+  KEY `idx_question_id` (`question_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `bookmarked_questions`
+--
+
+INSERT INTO `bookmarked_questions` (`id`, `user_id`, `question_id`, `created_at`) VALUES
+(4, 12, 0, '2025-08-15 20:38:43'),
+(6, 12, 237, '2025-08-15 20:57:57'),
+(9, 12, 242, '2025-08-15 20:59:40'),
+(8, 12, 1234, '2025-08-15 20:58:06');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `categories`
 --
 
@@ -5146,8 +5174,8 @@ CREATE TABLE IF NOT EXISTS `categories` (
 INSERT INTO `categories` (`id`, `title`, `title_en`, `index_code`, `parent_id`, `question_count`, `category_type`, `level`, `created_at`) VALUES
 (0, 'Grundstoff', 'Grundstoff', '1', NULL, 0, 1, 1, '2025-08-10 18:34:26'),
 (1, 'Zusatzstoff', 'Zusatzstoff', '2', NULL, 0, 2, 1, '2025-08-10 18:34:26'),
-(13, 'آموزش خطرات', 'Gefahrenlehre', '1.1', 0, 166, 1, 2, '2025-08-10 18:34:26'),
-(2, 'رفتار در ترافیک جاده‌ای', 'Verhalten im Straßenverkehr', '1.2', 0, 229, 1, 2, '2025-08-10 18:34:26'),
+(13, 'آموزش خطرات', 'Gefahrenlehre', '1.1', 0, 156, 1, 2, '2025-08-10 18:34:26'),
+(2, 'رفتار در ترافیک جاده‌ای', 'Verhalten im Straßenverkehr', '1.2', 0, 197, 1, 2, '2025-08-10 18:34:26'),
 (91, 'حق تقدم', 'Vorfahrt, Vorrang', '1.3', 0, 47, 1, 2, '2025-08-10 18:34:26'),
 (41, 'علائم ترافیکی', 'Verkehrszeichen', '1.4', 0, 139, 1, 2, '2025-08-10 18:34:26'),
 (92, 'حفاظت از محیط زیست', 'Umweltschutz', '1.5', 0, 24, 1, 2, '2025-08-10 18:34:26'),
@@ -5268,8 +5296,8 @@ INSERT INTO `categories` (`id`, `title`, `title_en`, `index_code`, `parent_id`, 
 DROP TABLE IF EXISTS `login_attempts`;
 CREATE TABLE IF NOT EXISTS `login_attempts` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `attempted_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idx_email_ip` (`email`,`ip_address`),
@@ -7126,10 +7154,10 @@ CREATE TABLE IF NOT EXISTS `recent_successful_logins` (
 
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
-  `id` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int NOT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_activity` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -7145,6 +7173,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `last_activ
 ('0j429c1ih0n6euvqjm26301c0o', 12, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', '2025-08-07 19:41:29', '2025-08-07 19:41:27'),
 ('35d2egvspsq6j7hjv1gbsttpch', 12, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', '2025-08-09 19:25:36', '2025-08-09 19:25:34'),
 ('grnpv4obgornik75dbjvrv2fv8', 12, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', '2025-08-08 20:27:44', '2025-08-08 20:27:42'),
+('nsth6q1eesnjlfp0tq70t120sj', 12, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', '2025-08-12 17:56:34', '2025-08-12 17:56:32'),
 ('o4qmfo49ah3lp44lhse1hq5v3f', 12, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', '2025-08-10 14:56:08', '2025-08-10 14:56:06'),
 ('t2frh2fs22fiqortcv7p9rjp1b', 12, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', '2025-08-05 20:24:02', '2025-08-05 20:24:00');
 
@@ -7225,14 +7254,14 @@ INSERT INTO `subscription_plans` (`id`, `name`, `slug`, `description`, `monthly_
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` enum('user','admin') COLLATE utf8mb4_unicode_ci DEFAULT 'user',
-  `google_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('user','admin') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'user',
+  `google_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email_verified` tinyint(1) DEFAULT '0',
-  `verification_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reset_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `verification_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reset_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `reset_expires` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -7264,17 +7293,17 @@ DROP TABLE IF EXISTS `user_logs`;
 CREATE TABLE IF NOT EXISTS `user_logs` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `action` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `status` enum('success','failed') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `action` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `status` enum('success','failed') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idx_user_id` (`user_id`),
   KEY `idx_action` (`action`),
   KEY `idx_created_at` (`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `user_logs`
@@ -7331,7 +7360,8 @@ INSERT INTO `user_logs` (`id`, `user_id`, `email`, `action`, `ip_address`, `user
 (48, 12, 'miadhouse@gmail.com', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'success', '2025-08-07 19:41:27'),
 (49, 12, 'miadhouse@gmail.com', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'success', '2025-08-08 20:27:42'),
 (50, 12, 'miadhouse@gmail.com', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'success', '2025-08-09 19:25:35'),
-(51, 12, 'miadhouse@gmail.com', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'success', '2025-08-10 14:56:07');
+(51, 12, 'miadhouse@gmail.com', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'success', '2025-08-10 14:56:07'),
+(52, 12, 'miadhouse@gmail.com', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'success', '2025-08-12 17:56:32');
 
 -- --------------------------------------------------------
 
