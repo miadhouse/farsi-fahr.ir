@@ -356,6 +356,7 @@ $currentQuestion = $selectedQuestions[$currentQuestionIndex];
                 .then(response => response.json())
                 .then(data => {
                     currentQuestionData = data;
+                    console.log(data)
                     updateQuestionDisplay(data);
                     updateSession(questionId);
                 })
