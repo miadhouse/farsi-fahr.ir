@@ -6,21 +6,21 @@
 
         <div class="content-area">
             <div id="statsSection" style="display: none">
-                <div class="row mb-4 text-center rounded border-3">
-                    <div class="col-md-4">
-                        <div class="stats-card">
+                <div class="row mb-4 text-center">
+                    <div class="col-4 ">
+                        <div class="stats-card  p-2 bordered">
                             <div class="stats-number" id="totalQuestions">0</div>
-                            <div>کل سوالات</div>
+                            <div> سوال</div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="stats-card">
+                    <div class="col-4 ">
+                        <div class="stats-card  p-2 bordered">
                             <div class="stats-number" id="totalCategories">0</div>
-                            <div>دسته بندی ها</div>
+                            <div>دسته بندی </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="stats-card">
+                    <div class="col-4  ">
+                        <div class="stats-card p-2 bordered">
                             <div class="stats-number" id="dataVersion">-</div>
                             <div>نسخه فعال</div>
                         </div>
