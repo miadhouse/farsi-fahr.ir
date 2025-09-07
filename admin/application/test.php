@@ -121,10 +121,8 @@
 
         .video-play-button i {
             margin-left: 5px;
-            /* Adjust for RTL play icon */
         }
 
-        /* Video Pre-Start Interface */
         .video-pre-start {
             text-align: center;
             padding: 40px 20px;
@@ -168,7 +166,6 @@
             margin-top: 15px;
         }
 
-        /* Video Modal Styles */
         .video-modal {
             display: none;
             position: fixed;
@@ -298,7 +295,6 @@
             color: white;
         }
 
-        /* Answer Image Styles */
         .answer-image-container {
             display: flex;
             align-items: center;
@@ -321,7 +317,6 @@
             padding: 5px 0;
         }
 
-        /* Numeric Input Styles */
         .numeric-answer-container {
             background: white;
             border: 2px solid #e9ecef;
@@ -440,16 +435,16 @@
 
         .navigation-buttons {
             display: flex;
-            gap: 10px;
+            gap: 3px;
             align-items: center;
         }
 
         .nav-btn {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             border: none;
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgb(25 69 41 / 65%);
             color: white;
             display: flex;
             align-items: center;
@@ -467,11 +462,18 @@
             cursor: not-allowed;
         }
 
+        /* صفحه‌بندی سوالات */
+        .question-pagination-container {
+            position: relative;
+        }
+
         .question-numbers {
             display: flex;
             gap: 5px;
             flex-wrap: wrap;
             justify-content: center;
+            min-height: 80px;
+            align-items: center;
         }
 
         .question-num-btn {
@@ -499,6 +501,48 @@
 
         .question-num-btn:hover {
             background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* دکمه‌های صفحه‌بندی */
+        .pagination-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination-controls:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .pagination-controls:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .pagination-prev {
+            right: -40px;
+        }
+
+        .pagination-next {
+            left: -40px;
+        }
+
+        .pagination-indicator {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .action-buttons {
@@ -572,7 +616,34 @@
             transition: width 0.3s ease;
         }
 
-        /* Responsive */
+        /* Responsive Pagination */
+        @media (max-width: 576px) {
+
+            /* موبایل: 1 دکمه در هر صفحه */
+            .question-numbers {
+                justify-content: center;
+                min-height: 60px;
+            }
+        }
+
+        @media (min-width: 577px) and (max-width: 992px) {
+
+            /* تبلت: 3 دکمه در هر صفحه */
+            .question-numbers {
+                justify-content: center;
+                min-height: 60px;
+            }
+        }
+
+        @media (min-width: 993px) {
+
+            /* دسکتاپ: 5 دکمه در هر صفحه */
+            .question-numbers {
+                justify-content: center;
+                min-height: 60px;
+            }
+        }
+
         @media (max-width: 768px) {
             .question-content {
                 padding: 20px;
@@ -580,12 +651,6 @@
 
             .navigation-container {
                 padding: 15px 20px;
-            }
-
-            .question-numbers .question-num-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 0.8em;
             }
 
             .numeric-keypad {
@@ -606,6 +671,14 @@
             .image-section,
             .answers-section {
                 flex: none;
+            }
+
+            .pagination-prev {
+                right: -35px;
+            }
+
+            .pagination-next {
+                left: -35px;
             }
         }
     </style>
@@ -637,7 +710,7 @@
             <!-- Question Content -->
             <div class="question-content">
                 <h2 class="question-title" id="questionTitle">
-                    سوال در حال بارگذاری...
+                    Was versteht man unter defensivem Fahren?
                 </h2>
 
                 <!-- Video Pre-Start Interface -->
@@ -656,7 +729,36 @@
                 <div id="contentContainer">
                     <!-- Multiple Choice Answers -->
                     <div class="answers-section" id="answersSection">
-                        <!-- گزینه‌های پاسخ اینجا بارگذاری می‌شوند -->
+                        <div class="answer-option" data-answer-index="0" onclick="selectAnswer(0, 0)">
+                            <div class="d-flex align-items-center">
+                                <div class="answer-checkbox">
+                                    <i class="bi bi-check" style="display: none;"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="answer-text">Mit Fehlern anderer rechnen</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer-option" data-answer-index="1" onclick="selectAnswer(0, 1)">
+                            <div class="d-flex align-items-center">
+                                <div class="answer-checkbox">
+                                    <i class="bi bi-check" style="display: none;"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="answer-text">Vorsorgich an jeder Kreuzung anhalten</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer-option" data-answer-index="2" onclick="selectAnswer(0, 2)">
+                            <div class="d-flex align-items-center">
+                                <div class="answer-checkbox">
+                                    <i class="bi bi-check" style="display: none;"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="answer-text">Nicht auf dem eigenen Recht bestehen</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Numeric Input Answer -->
@@ -704,7 +806,7 @@
             <div class="navigation-container">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="question-counter">
-                        <span id="currentQuestionIndex">1</span> از <span id="totalQuestions">12</span> سوال
+                        <span id="currentQuestionIndex">1</span> از <span id="totalQuestions">170</span> سوال
                     </div>
                     <div class="action-buttons d-flex">
                         <button class="btn-abort" onclick="closeTest()">
@@ -722,20 +824,32 @@
                         <button class="nav-btn" onclick="firstQuestion()" title="اولین سوال" id="firstBtn">
                             <i class="bi bi-chevron-bar-right"></i>
                         </button>
+                        <button class="nav-btn" onclick="prevPage()" title="صفحه قبلی" id="prevBtn">
+                            <i class="bi bi-chevron-double-right"></i>
+                        </button>
                         <button class="nav-btn" onclick="prevQuestion()" title="سوال قبلی" id="prevBtn">
                             <i class="bi bi-chevron-right"></i>
                         </button>
                     </div>
 
-                    <!-- Question Numbers -->
-                    <div class="question-numbers" id="questionNumbers">
-                        <!-- شماره سوالات اینجا بارگذاری می‌شوند -->
+                    <!-- Question Numbers with Pagination -->
+                    <div class="question-pagination-container">
+
+                        <div class="question-numbers" id="questionNumbers">
+                            <!-- شماره سوالات اینجا بارگذاری می‌شوند -->
+                        </div>
+                        <div class="pagination-indicator" id="paginationIndicator">
+                            صفحه 1 از 34
+                        </div>
                     </div>
 
                     <!-- Forward Navigation -->
                     <div class="navigation-buttons">
                         <button class="nav-btn" onclick="nextQuestion()" title="سوال بعدی" id="nextBtn">
                             <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <button class="nav-btn" onclick="nextPage()" title="سوال بعدی" id="nextBtn">
+                            <i class="bi bi-chevron-double-left"></i>
                         </button>
                         <button class="nav-btn" onclick="lastQuestion()" title="آخرین سوال" id="lastBtn">
                             <i class="bi bi-chevron-bar-left"></i>
@@ -765,17 +879,190 @@
         // Global variables
         let questions = [];
         let currentQuestionIndex = 0;
-        let mode = 'practice'; // practice or review
-        let userAnswers = {}; // ذخیره پاسخ‌های کاربر
-        let questionStates = {}; // ذخیره وضعیت سوالات (answered, confirmed)
-
-        // Store shuffled order for each question to maintain consistency
+        let mode = 'practice';
+        let userAnswers = {};
+        let questionStates = {};
         let questionAnswerOrder = {};
+
+        // متغیرهای صفحه‌بندی
+        let currentPage = 0;
+        let questionsPerPage = 5; // پیش‌فرض برای دسکتاپ
+        let totalPages = 0;
 
         // Image and Video base URLs
         const IMAGE_BASE_URL = 'https://t24.theorie24.de/2025-01-v400/data/img/images/';
         const VIDEO_BASE_URL = 'https://www.theorie24.de/live_images/_current_ws_2024-10-01_2025-04-01/videos/';
         const ANSWER_IMAGE_BASE_URL = 'https://t24.theorie24.de/2025-01-v400/data/img/etc/de/';
+
+        // Video state tracking
+        let videoStates = {};
+
+        // تابع تعیین تعداد سوالات در هر صفحه بر اساس اندازه صفحه
+        function getQuestionsPerPage() {
+            const width = window.innerWidth;
+            if (width <= 576) {
+                return 1; // موبایل: 1 دکمه
+            } else if (width <= 992) {
+                return 3; // تبلت: 3 دکمه
+            } else {
+                return 10; // دسکتاپ: 5 دکمه
+            }
+        }
+
+        // تابع محاسبه صفحه‌بندی
+        function calculatePagination() {
+            questionsPerPage = getQuestionsPerPage();
+            totalPages = Math.ceil(questions.length / questionsPerPage);
+
+            // اطمینان از اینکه صفحه فعلی معتبر است
+            if (currentPage >= totalPages) {
+                currentPage = totalPages - 1;
+            }
+            if (currentPage < 0) {
+                currentPage = 0;
+            }
+        }
+
+        // تابع نمایش دکمه‌های سوالات برای صفحه فعلی
+        function displayCurrentPage() {
+            const questionNumbers = document.getElementById('questionNumbers');
+            questionNumbers.innerHTML = '';
+
+            const startIndex = currentPage * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, questions.length);
+
+            for (let i = startIndex; i < endIndex; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'question-num-btn';
+                btn.textContent = i + 1;
+                btn.onclick = () => goToQuestion(i);
+                btn.id = `questionBtn${i}`;
+
+                // اعمال کلاس‌های مناسب
+                if (i === currentQuestionIndex) {
+                    btn.classList.add('active');
+                } else if (questionStates[i] && questionStates[i].answered) {
+                    btn.classList.add('answered');
+                }
+
+                questionNumbers.appendChild(btn);
+            }
+
+            // بروزرسانی نشانگر صفحه
+            updatePaginationIndicator();
+
+            // بروزرسانی دکمه‌های صفحه‌بندی
+            updatePaginationButtons();
+        }
+
+        // تابع بروزرسانی نشانگر صفحه
+        function updatePaginationIndicator() {
+            const indicator = document.getElementById('paginationIndicator');
+            indicator.textContent = `صفحه ${currentPage + 1} از ${totalPages}`;
+        }
+
+        // تابع بروزرسانی دکمه‌های صفحه‌بندی
+        function updatePaginationButtons() {
+            const prevBtn = document.getElementById('paginationPrev');
+            const nextBtn = document.getElementById('paginationNext');
+
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage === totalPages - 1;
+        }
+
+        // تابع رفتن به صفحه قبل
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                displayCurrentPage();
+            }
+        }
+
+        // تابع رفتن به صفحه بعد
+        function nextPage() {
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                displayCurrentPage();
+            }
+        }
+
+        // تابع پیدا کردن صفحه سوال
+        function findQuestionPage(questionIndex) {
+            return Math.floor(questionIndex / questionsPerPage);
+        }
+
+        // Initialize test with sample data
+        function initializeTest() {
+            <?php
+            // دریافت داده‌های ارسال شده از فرم
+            if (isset($_POST['session_data'])) {
+                $sessionData = json_decode($_POST['session_data'], true);
+                echo "questions = " . json_encode($sessionData['questions'], JSON_UNESCAPED_UNICODE) . ";\n";
+                echo "mode = '" . $sessionData['mode'] . "';\n";
+            } elseif (isset($_POST['questions']) && isset($_POST['mode'])) {
+                // روش جایگزین
+                echo "questions = " . $_POST['questions'] . ";\n";
+                echo "mode = '" . $_POST['mode'] . "';\n";
+            } else {
+                // داده‌های نمونه برای تست
+            
+            }
+            ?>
+
+            // Initialize user answers, question states, and video states
+            questions.forEach((question, index) => {
+                userAnswers[index] = question.asw_type_1 === "2" ? "" : [];
+                questionStates[index] = {
+                    answered: false,
+                    confirmed: false
+                };
+
+                videoStates[index] = {
+                    hasPlayed: false,
+                    showingEndImage: false,
+                    remainingViews: 5,
+                    videoStarted: false
+                };
+
+                // For multiple choice questions, create shuffled order
+                if (question.asw_type_1 === "1" && question.answers) {
+                    questionAnswerOrder[index] = question.answers.map((answer, answerIndex) => ({
+                        ...answer,
+                        originalIndex: answerIndex
+                    }));
+
+                    // Shuffle only once per question to maintain consistency
+                    for (let i = questionAnswerOrder[index].length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [questionAnswerOrder[index][i], questionAnswerOrder[index][j]] =
+                            [questionAnswerOrder[index][j], questionAnswerOrder[index][i]];
+                    }
+                }
+            });
+
+            // Set mode indicator
+            document.getElementById('modeIndicator').textContent =
+                mode === 'practice' ? 'تمرین' : 'مرور';
+
+            if (mode === 'review') {
+                document.getElementById('modeIndicator').classList.add('bg-info');
+                document.getElementById('confirmBtn').style.display = 'none';
+            }
+
+            // محاسبه صفحه‌بندی و نمایش صفحه اول
+            calculatePagination();
+            displayCurrentPage();
+
+            // Load first question
+            loadQuestion(0);
+
+            // Update navigation
+            updateNavigation();
+
+            document.getElementById('totalQuestions').textContent = questions.length;
+
+            console.log('Test initialized with', questions.length, 'questions in', mode, 'mode');
+        }
 
         // Helper function to check if answer text is an image filename
         function isAnswerImage(text) {
@@ -805,98 +1092,6 @@
             return text;
         }
 
-        // Video state tracking
-        let videoStates = {};
-
-        // Initialize test with sample data that includes video questions
-        function initializeTest() {
-            <?php
-            // دریافت داده‌های ارسال شده از فرم
-            if (isset($_POST['session_data'])) {
-                $sessionData = json_decode($_POST['session_data'], true);
-                echo "questions = " . json_encode($sessionData['questions'], JSON_UNESCAPED_UNICODE) . ";\n";
-                echo "mode = '" . $sessionData['mode'] . "';\n";
-            } elseif (isset($_POST['questions']) && isset($_POST['mode'])) {
-                // روش جایگزین
-                echo "questions = " . $_POST['questions'] . ";\n";
-                echo "mode = '" . $_POST['mode'] . "';\n";
-            } else {
-                // داده‌های نمونه برای تست
-                echo "";
-                echo "mode = 'practice';\n";
-            }
-            ?>
-
-            // Initialize user answers, question states, and video states
-            questions.forEach((question, index) => {
-                userAnswers[index] = question.asw_type_1 === "2" ? "" : [];
-                questionStates[index] = {
-                    answered: false,
-                    confirmed: false
-                };
-
-                // Initialize video state
-                videoStates[index] = {
-                    hasPlayed: false,
-                    showingEndImage: false,
-                    remainingViews: 5,
-                    videoStarted: false // Track if video question has been started
-                };
-
-                // For multiple choice questions, create shuffled order
-                if (question.asw_type_1 === "1" && question.answers) {
-                    questionAnswerOrder[index] = question.answers.map((answer, answerIndex) => ({
-                        ...answer,
-                        originalIndex: answerIndex
-                    }));
-
-                    // Shuffle only once per question to maintain consistency
-                    for (let i = questionAnswerOrder[index].length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [questionAnswerOrder[index][i], questionAnswerOrder[index][j]] =
-                            [questionAnswerOrder[index][j], questionAnswerOrder[index][i]];
-                    }
-                }
-            });
-
-            // Set mode indicator
-            document.getElementById('modeIndicator').textContent =
-                mode === 'practice' ? 'تمرین' : 'مرور';
-
-            if (mode === 'review') {
-                document.getElementById('modeIndicator').classList.add('bg-info');
-                document.getElementById('confirmBtn').style.display = 'none';
-            }
-
-            // Generate question numbers
-            generateQuestionNumbers();
-
-            // Load first question
-            loadQuestion(0);
-
-            // Update navigation
-            updateNavigation();
-
-            console.log('Test initialized with', questions.length, 'questions in', mode, 'mode');
-        }
-
-        // Generate question number buttons
-        function generateQuestionNumbers() {
-            const questionNumbers = document.getElementById('questionNumbers');
-            questionNumbers.innerHTML = '';
-
-            questions.forEach((question, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'question-num-btn';
-                btn.textContent = index + 1;
-                btn.onclick = () => goToQuestion(index);
-                btn.id = `questionBtn${index}`;
-                questionNumbers.appendChild(btn);
-            });
-
-            document.getElementById('totalQuestions').textContent = questions.length;
-        }
-
         // Load specific question
         function loadQuestion(index) {
             if (index < 0 || index >= questions.length) return;
@@ -913,6 +1108,16 @@
             const progress = ((index + 1) / questions.length) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
 
+            // بررسی اینکه آیا نیاز به تغییر صفحه هست
+            const questionPage = findQuestionPage(index);
+            if (questionPage !== currentPage) {
+                currentPage = questionPage;
+                displayCurrentPage();
+            } else {
+                // فقط بروزرسانی دکمه‌های فعلی
+                updateQuestionButtons();
+            }
+
             // Check if this is a video question that hasn't been started yet
             const hasVideo = question.picture && isVideoFile(question.picture);
             const videoNotStarted = hasVideo && !videoStates[index].videoStarted && mode !== 'review';
@@ -925,9 +1130,6 @@
 
             // Update navigation buttons
             updateNavigation();
-
-            // Update question number buttons
-            updateQuestionButtons();
 
             console.log('Loaded question', index + 1, ':', question.text, 'Type:', question.asw_type_1, 'Has video:', hasVideo, 'Video started:', videoStates[index].videoStarted);
         }
@@ -1528,14 +1730,8 @@
         // Confirm multiple choice answer
         function confirmMultipleChoiceAnswer(question, questionIndex) {
             const userAnswer = userAnswers[questionIndex] || [];
-
-            if (userAnswer.length === 0) {
-                alert('لطفاً حداقل یک پاسخ انتخاب کنید');
-                return;
-            }
-
-            // Mark as confirmed
             questionStates[questionIndex].confirmed = true;
+            questionStates[questionIndex].answered = true;
 
             // Show correct/incorrect states
             const answerElements = document.querySelectorAll('.answer-option');
@@ -1634,7 +1830,7 @@
                     hasAnswer = userAnswers[questionIndex] && userAnswers[questionIndex].trim() !== '';
                 } else {
                     // Multiple choice question
-                    hasAnswer = userAnswers[questionIndex] && userAnswers[questionIndex].length > 0;
+                    hasAnswer = true; // همیشه فعال برای سوالات چندگزینه‌ای
                 }
 
                 if (hasAnswer) {
@@ -1655,18 +1851,23 @@
             document.getElementById('lastBtn').disabled = currentQuestionIndex === questions.length - 1;
         }
 
-        // Update question number buttons
+        // Update question number buttons (only for currently visible page)
         function updateQuestionButtons() {
-            questions.forEach((_, index) => {
-                const btn = document.getElementById(`questionBtn${index}`);
-                btn.classList.remove('active', 'answered');
+            const startIndex = currentPage * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, questions.length);
 
-                if (index === currentQuestionIndex) {
-                    btn.classList.add('active');
-                } else if (questionStates[index].answered) {
-                    btn.classList.add('answered');
+            for (let i = startIndex; i < endIndex; i++) {
+                const btn = document.getElementById(`questionBtn${i}`);
+                if (btn) {
+                    btn.classList.remove('active', 'answered');
+
+                    if (i === currentQuestionIndex) {
+                        btn.classList.add('active');
+                    } else if (questionStates[i] && questionStates[i].answered) {
+                        btn.classList.add('answered');
+                    }
                 }
-            });
+            }
         }
 
         // Navigation functions
@@ -1699,6 +1900,19 @@
                 window.history.back();
             }
         }
+
+        // Event listener for window resize to recalculate pagination
+        window.addEventListener('resize', function () {
+            const oldQuestionsPerPage = questionsPerPage;
+            calculatePagination();
+
+            // If questions per page changed, update display
+            if (oldQuestionsPerPage !== questionsPerPage) {
+                // Find which page the current question should be on
+                currentPage = findQuestionPage(currentQuestionIndex);
+                displayCurrentPage();
+            }
+        });
 
         // Initialize test when page loads
         document.addEventListener('DOMContentLoaded', function () {

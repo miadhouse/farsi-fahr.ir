@@ -656,6 +656,11 @@
 
       this.populateQuestionsList(categoryQuestions);
       $("#questionSelectModal").modal("show");
+
+      // انتخاب همه سوالات به صورت پیش‌فرض
+      $(".question-checkbox").prop("checked", true);
+      $(".question-list-item").addClass("selected");
+      this.updateSelectedCount();
     }
 
     getCategoryQuestionsForModal() {
