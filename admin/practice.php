@@ -58,12 +58,12 @@
 <!-- build:js assets/vendor/js/core.js -->
 <?php include("common/scripts.php"); ?>
 
-<script>
+<!-- <script>
   class DrivingLicenseApp {
     constructor() {
       // تنظیم متغیرهای ثابت به جای انتخاب کاربر
       this.selectedClass = "6"; // کلاس ثابت
-      this.selectedDataVersion = 1; // نسخه ثابت (نسخه 2)
+      this.selectedDataVersion = 2; // نسخه ثابت (نسخه 2)
       this.currentData = {};
       this.currentCategoryId = null;
       this.currentMode = null;
@@ -232,7 +232,8 @@
           questions: Object.keys(this.currentData.questions).length,
           sets: Object.keys(this.currentData.sets).length,
         });
-
+        const allQuestionNumbers = this.getAllFilteredQuestions().map(q => q.number);
+        console.log("تمام شماره‌های سوالات:", allQuestionNumbers);
         // تشخیص اینکه واقعاً کدام نسخه لود شده
         const firstQuestionKey = Object.keys(this.currentData.questions)[0];
         if (firstQuestionKey) {
@@ -1078,7 +1079,7 @@
   $(document).ready(() => {
     new DrivingLicenseApp();
   });
-</script>
+</script> -->
 </body>
 
 </html>
