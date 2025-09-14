@@ -1055,7 +1055,6 @@ $currentQuestion = $selectedQuestions[$currentQuestionIndex];
                     showVocabToast('خطا در ارتباط با سرور', 'error');
                 });
         }
-
         function showVocabToast(message, type = 'info') {
             const toast = document.createElement('div');
             toast.className = `alert alert-${type === 'error' ? 'danger' : type === 'success' ? 'success' : 'info'} vocab-toast alert-dismissible`;

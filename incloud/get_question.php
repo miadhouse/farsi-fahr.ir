@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/questions.php';
 require_once __DIR__ . '/../config/config.php';
 
@@ -12,7 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     ]);
     exit;
 }
-
+// بررسی CSRF token
+if (!isset($_POST['csrf_token']) || empty($_POST['csrf_token'])) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'توکن امنیتی ارسال نشده است'
+    ]);
+    exit;
+}
 if (!isset($_POST['question_id']) || empty($_POST['question_id'])) {
     echo json_encode([
         'success' => false,
@@ -24,7 +32,7 @@ if (!isset($_POST['question_id']) || empty($_POST['question_id'])) {
 $questionId = intval($_POST['question_id']);
 
 try {
- 
+
     $stmt = $pdo->prepare("
         SELECT 
            *
@@ -48,7 +56,7 @@ try {
     echo json_encode([
         'success' => true,
         'question' => $question,
-        'answers' => getAnswers( $pdo, $questionId),
+        'answers' => getAnswers($pdo, $questionId),
         'message' => 'سوال با موفقیت بارگذاری شد'
     ]);
 
@@ -66,41 +74,42 @@ try {
     ]);
 }
 
-function getAnswers(PDO $pdo, $questionId) {
+function getAnswers(PDO $pdo, $questionId)
+{
     try {
- 
-    $stmt = $pdo->prepare("
+
+        $stmt = $pdo->prepare("
         SELECT 
            *
         FROM answers 
         WHERE question_id = :question_id
     ");
 
-    $stmt->bindValue(':question_id', (int) $questionId, PDO::PARAM_INT);
-    $stmt->execute();
+        $stmt->bindValue(':question_id', (int) $questionId, PDO::PARAM_INT);
+        $stmt->execute();
 
-    $answers = $stmt->fetchAll();
+        $answers = $stmt->fetchAll();
 
-    if (!$answers) {
+        if (!$answers) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'پاسخی جهت نمایش وجود ندارد'
+            ]);
+            exit;
+        }
+        return $answers;
+
+    } catch (PDOException $e) {
+        error_log("Database error in get_question.php: " . $e->getMessage());
         echo json_encode([
             'success' => false,
-            'message' => 'پاسخی جهت نمایش وجود ندارد'
+            'message' => $e->getMessage()
         ]);
-        exit;
+    } catch (Exception $e) {
+        error_log("General error in get_question.php: " . $e->getMessage());
+        echo json_encode([
+            'success' => false,
+            'message' => 'خطای سیستمی رخ داده است'
+        ]);
     }
-    return $answers;
-
-} catch (PDOException $e) {
-    error_log("Database error in get_question.php: " . $e->getMessage());
-    echo json_encode([
-        'success' => false,
-        'message' => $e->getMessage()
-    ]);
-} catch (Exception $e) {
-    error_log("General error in get_question.php: " . $e->getMessage());
-    echo json_encode([
-        'success' => false,
-        'message' => 'خطای سیستمی رخ داده است'
-    ]);
-}
 }
