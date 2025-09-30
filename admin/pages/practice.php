@@ -69,10 +69,9 @@ foreach ($zusatzstoff_main as $cat) {
                             <?php if (!empty($all_subcategories[$category['id']])): ?>
                                 <div class="subcategories" id="sub-<?php echo $category['id']; ?>">
                                     <?php foreach ($all_subcategories[$category['id']] as $subcategory): ?>
-                                        <div class="subcategory-item" 
-                                             data-subcategory-id="<?php echo $subcategory['id']; ?>"
-                                             data-subcategory-title="<?php echo htmlspecialchars($subcategory['title']); ?>"
-                                             data-question-count="<?php echo $subcategory['question_count']; ?>">
+                                        <div class="subcategory-item" data-subcategory-id="<?php echo $subcategory['id']; ?>"
+                                            data-subcategory-title="<?php echo htmlspecialchars($subcategory['title']); ?>"
+                                            data-question-count="<?php echo $subcategory['question_count']; ?>">
                                             <div class="subcategory-text">
                                                 <?php echo htmlspecialchars($subcategory['title']); ?>
                                             </div>
@@ -122,10 +121,9 @@ foreach ($zusatzstoff_main as $cat) {
                             <?php if (!empty($all_subcategories[$category['id']])): ?>
                                 <div class="subcategories" id="sub-<?php echo $category['id']; ?>">
                                     <?php foreach ($all_subcategories[$category['id']] as $subcategory): ?>
-                                        <div class="subcategory-item" 
-                                             data-subcategory-id="<?php echo $subcategory['id']; ?>"
-                                             data-subcategory-title="<?php echo htmlspecialchars($subcategory['title']); ?>"
-                                             data-question-count="<?php echo $subcategory['question_count']; ?>">
+                                        <div class="subcategory-item" data-subcategory-id="<?php echo $subcategory['id']; ?>"
+                                            data-subcategory-title="<?php echo htmlspecialchars($subcategory['title']); ?>"
+                                            data-question-count="<?php echo $subcategory['question_count']; ?>">
                                             <div class="subcategory-text">
                                                 <?php echo htmlspecialchars($subcategory['title']); ?>
                                             </div>
@@ -192,7 +190,7 @@ foreach ($zusatzstoff_main as $cat) {
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="no-selection-message" id="noSelectionMessage">
                     <div class="message-content">
                         <i class="fas fa-info-circle"></i>
@@ -202,7 +200,7 @@ foreach ($zusatzstoff_main as $cat) {
             </div>
         </div>
     </div>
-    
+
     <!-- Questions Selection Modal -->
     <div class="modal fade" id="questionsModal" tabindex="-1" aria-labelledby="questionsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -211,7 +209,8 @@ foreach ($zusatzstoff_main as $cat) {
                     <div class="d-flex justify-content-between w-100">
                         <h5 class="modal-title" id="questionsModalLabel">انتخاب سوالات</h5>
                         <div class="modal-actions">
-                            <button class="btn btn-info btn-sm me-2" id="browseQuestionsBtn" onclick="browseQuestions()">
+                            <button class="btn btn-info btn-sm me-2" id="browseQuestionsBtn"
+                                onclick="browseQuestions()">
                                 <i class="fas fa-list mx-1"></i>
                                 مرور سوالات
                             </button>
@@ -227,7 +226,7 @@ foreach ($zusatzstoff_main as $cat) {
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div class="fs-6">
                             <span class="badge bg-primary p-1" id="selectedQuestionsCount">0</span>
-                            سوال انتخاب شده از 
+                            سوال انتخاب شده از
                             <span class="badge bg-secondary p-1" id="totalQuestionsCount">0</span>
                             سوال
                         </div>
@@ -235,7 +234,8 @@ foreach ($zusatzstoff_main as $cat) {
                             <button class="btn p-1 btn-sm btn-outline-primary btn-sm" onclick="selectAllQuestions()">
                                 <i class="fas fa-check-double mx-1"></i>
                             </button>
-                            <button class="btn p-1 btn-sm btn-outline-secondary btn-sm ms-1" onclick="deselectAllQuestions()">
+                            <button class="btn p-1 btn-sm btn-outline-secondary btn-sm ms-1"
+                                onclick="deselectAllQuestions()">
                                 <i class="fas fa-times mx-1"></i>
                             </button>
                         </div>
@@ -271,50 +271,268 @@ foreach ($zusatzstoff_main as $cat) {
             </div>
         </div>
     </div>
-    
     <style>
-        .category-footer {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            padding:10px 25px;
-            color: white;
+        /* استایل کلی آکاردئون */
+        .category-container {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            margin-bottom: 20px;
-            animation: slideUp 0.5s ease-out;
+            padding: 0.75rem 1rem;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        .category-item:hover {
+            background-color: #f3f4f6;
+            border-color: #d1d5db;
+        }
+
+        .category-item.expanded {
+            background-color: #dbeafe;
+            border-color: #3b82f6;
+            color: #1d4ed8;
+        }
+
+        .category-item.expandable .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .category-item.expandable.expanded .arrow {
+            transform: rotate(90deg);
+        }
+
+        .category-text {
+            flex-grow: 1;
+            margin-right: 0.5rem;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .category-badges {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .question-badge,
+        .code-badge,
+        .subcategory-badge,
+        .subcategory-code {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+        }
+
+        .question-badge {
+            background-color: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .code-badge {
+            background-color: #f3f4f6;
+            color: #4b5563;
+        }
+
+        .subcategory-badge {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .subcategory-code {
+            background-color: #f5f5f5;
+            color: #6b7280;
+        }
+
+        /* استایل زیرمجموعه‌ها (Subcategories) */
+        .subcategories {
+            margin-top: 0.5rem;
+            padding-left: 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            border-left: 3px solid #e5e7eb;
+        }
+
+        .subcategories.expanded {
+            max-height: 2000px;
+            /* مقدار بالایی برای انعطاف‌پذیری */
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-left-color: #3b82f6;
+        }
+
+        .subcategory-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 0.25rem;
+            user-select: none;
+        }
+
+        .subcategory-item:hover {
+            background-color: #f3f4f6;
+            border-color: #d1d5db;
+        }
+
+        .subcategory-item.selected {
+            background-color: #dbeafe;
+            border-color: #3b82f6;
+            color: #1d4ed8;
+        }
+
+        .subcategory-text {
+            flex-grow: 1;
+            margin-right: 0.5rem;
+            font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .subcategory-badges {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* استایل برای حالت انتخاب شده */
+        .category-item.selected {
+            background-color: #dbeafe;
+            border-color: #3b82f6;
+            color: #1d4ed8;
+        }
+
+        /* استایل برای افکت ریپل */
+        .category-item,
+        .subcategory-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-item::after,
+        .subcategory-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.6s ease;
+            pointer-events: none;
+        }
+
+        .category-item.ripple-effect::after,
+        .subcategory-item.ripple-effect::after {
+            width: 100%;
+            height: 100%;
+            transform: scale(1);
+        }
+
+        /* استایل برای تغییر جهت پیش‌فرض فونت فارسی */
+        .category-text,
+        .subcategory-text {
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* استایل برای آیکون‌ها */
+        .fas.arrow {
+            font-size: 0.875rem;
+            color: #6b7280;
+            transition: transform 0.3s ease;
+        }
+
+        .fas.arrow:hover {
+            color: #111827;
+        }
+
+        /* استایل برای کارت‌های دسته‌بندی */
+        .category-card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: #f8fafc;
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title i.icon {
+            font-size: 1.5rem;
+            color: #6b7280;
+        }
+
+        .total-questions {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #111827;
+        }
+
+        /* استایل برای فوتر انتخاب */
+        #categoryFooter {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
         }
 
         .selected-category-info h4 {
             margin: 0;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
         .selected-category-details {
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0.9;
-            margin-top: 5px;
-        }
-
-        .category-actions {
-            display: flex;
-            gap: 15px;
         }
 
         .category-actions button {
-            padding: 12px 20px;
+            margin-left: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
             border: none;
-            border-radius: 8px;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            transition: all 0.2s ease;
         }
 
         .btn-select-questions {
@@ -324,157 +542,39 @@ foreach ($zusatzstoff_main as $cat) {
 
         .btn-select-questions:hover {
             background: #059669;
-            transform: translateY(-2px);
         }
 
         .btn-clear {
-            background: rgba(239, 68, 68, 0.8);
+            background: #ef4444;
             color: white;
         }
 
         .btn-clear:hover {
-            background: rgba(239, 68, 68, 1);
-            transform: translateY(-2px);
+            background: #dc2626;
         }
 
+        /* استایل پیام بدون انتخاب */
         .no-selection-message {
             background: #f3f4f6;
-            border: 2px dashed #d1d5db;
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
             color: #6b7280;
+            padding: 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
         }
 
         .message-content {
-            font-size: 1.1rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            gap: 0.5rem;
+            font-size: 0.9rem;
         }
 
         .message-content i {
             color: #3b82f6;
-            font-size: 1.5rem;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .category-item.selected,
-        .subcategory-item.selected {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            color: white;
-            transform: translateX(-5px);
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-            position: relative;
-        }
-
-        .category-item.selected::after {
-            content: '✓';
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .subcategory-item.selected::after {
-            content: '✓';
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-weight: bold;
-            font-size: 1rem;
-        }
-
-        .category-item.selected .question-badge,
-        .category-item.selected .code-badge,
-        .subcategory-item.selected .subcategory-badge,
-        .subcategory-item.selected .subcategory-code {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        .category-item.selected .arrow {
-            color: white;
-        }
-
-        /* Modal Styles */
-        .modal-actions {
-            display: flex;
-            align-items: center;
-        }
-
-        .form-check {
-            padding: 10px;
-            border-radius: 8px;
-            transition: background-color 0.2s ease;
-        }
-
-        .form-check:hover {
-            background-color: #f8f9fa;
-        }
-
-        .form-check-input:checked {
-            background-color: #0d6efd;
-            border-color: #0d6efd;
-        }
-
-        .selected-info {
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-
-        #questionsContainer {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        @media (max-width: 768px) {
-            .category-footer {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-            
-            .category-actions {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .category-actions button {
-                flex: 1;
-                min-width: 120px;
-            }
-
-            .modal-header .d-flex {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .modal-actions {
-                justify-content: center;
-            }
-
-            .modal-footer .d-flex {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
         }
     </style>
 
@@ -489,7 +589,7 @@ foreach ($zusatzstoff_main as $cat) {
         function getCookie(name) {
             const nameEQ = name + "=";
             const ca = document.cookie.split(';');
-            for(let i = 0; i < ca.length; i++) {
+            for (let i = 0; i < ca.length; i++) {
                 let c = ca[i];
                 while (c.charAt(0) === ' ') c = c.substring(1, c.length);
                 if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
@@ -509,16 +609,16 @@ foreach ($zusatzstoff_main as $cat) {
         let loadedQuestions = [];
 
         // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Load saved category from cookie
             loadSavedCategory();
-            
+
             // Initialize animations
             const cards = document.querySelectorAll('.category-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(30px)';
-                
+
                 setTimeout(() => {
                     card.style.transition = 'all 0.6s ease';
                     card.style.opacity = '1';
@@ -537,7 +637,7 @@ foreach ($zusatzstoff_main as $cat) {
                     selectedCategoryTitle = categoryData.title;
                     selectedQuestionCount = categoryData.questionCount;
                     selectedType = categoryData.type;
-                    
+
                     updateFooterDisplay();
                 } catch (e) {
                     console.error('خطا در بارگذاری دسته‌بندی ذخیره شده:', e);
@@ -581,7 +681,7 @@ foreach ($zusatzstoff_main as $cat) {
             selectedCategoryTitle = title;
             selectedQuestionCount = questionCount;
             selectedType = type;
-            
+
             updateFooterDisplay();
             saveCategoryToCookie();
         }
@@ -592,42 +692,42 @@ foreach ($zusatzstoff_main as $cat) {
             selectedCategoryTitle = '';
             selectedQuestionCount = 0;
             selectedType = '';
-            
+
             updateFooterDisplay();
             deleteCookie('selectedCategory');
-            
+
             closeAllAccordions();
         }
 
-       // Open questions modal
-function openQuestionsModal() {
-    if (!selectedCategoryId) return;
+        // Open questions modal
+        function openQuestionsModal() {
+            if (!selectedCategoryId) return;
 
-    const modalElement = document.getElementById('questionsModal');
-    const modal = new bootstrap.Modal(modalElement);
-    const modalTitle = document.getElementById('questionsModalLabel');
-    
-    modalTitle.textContent = `انتخاب سوالات - ${selectedCategoryTitle}`;
-    
-    // Show the modal
-    modal.show();
-    
-    // Add event listeners to the modal element, not the Modal instance
-    modalElement.addEventListener('shown.bs.modal', () => {
-        document.getElementById('categoryFooter').hidden= true;;
-    });
-    
-    modalElement.addEventListener('hidden.bs.modal', () => {
-                document.getElementById('categoryFooter').hidden= false;;
+            const modalElement = document.getElementById('questionsModal');
+            const modal = new bootstrap.Modal(modalElement);
+            const modalTitle = document.getElementById('questionsModalLabel');
 
-    });
-    
-    loadQuestions();
-}
+            modalTitle.textContent = `انتخاب سوالات - ${selectedCategoryTitle}`;
+
+            // Show the modal
+            modal.show();
+
+            // Add event listeners to the modal element, not the Modal instance
+            modalElement.addEventListener('shown.bs.modal', () => {
+                document.getElementById('categoryFooter').hidden = true;;
+            });
+
+            modalElement.addEventListener('hidden.bs.modal', () => {
+                document.getElementById('categoryFooter').hidden = false;;
+
+            });
+
+            loadQuestions();
+        }
         // Load questions via AJAX
         function loadQuestions() {
             const container = document.getElementById('questionsContainer');
-            
+
             // Show loading spinner
             container.innerHTML = `
                 <div class="text-center p-4">
@@ -638,8 +738,8 @@ function openQuestionsModal() {
                 </div>
             `;
 
-            const url = selectedType === 'subcategory' 
-                ? `pages/load_questions.php?subcategory_id=${selectedCategoryId}` 
+            const url = selectedType === 'subcategory'
+                ? `pages/load_questions.php?subcategory_id=${selectedCategoryId}`
                 : `pages/load_questions.php?category_id=${selectedCategoryId}`;
 
             fetch(url)
@@ -672,10 +772,10 @@ function openQuestionsModal() {
         function updateQuestionCounts() {
             const checkboxes = document.querySelectorAll('#questionsContainer input[type="checkbox"]');
             const selectedCheckboxes = document.querySelectorAll('#questionsContainer input[type="checkbox"]:checked');
-            
+
             const totalCount = checkboxes.length;
             const selectedCount = selectedCheckboxes.length;
-            
+
             document.getElementById('totalQuestionsCount').textContent = totalCount;
             document.getElementById('selectedQuestionsCount').textContent = selectedCount;
             document.getElementById('footerSelectedCount').textContent = selectedCount;
@@ -708,7 +808,7 @@ function openQuestionsModal() {
         // Navigate to test page with selected questions
         function navigateToTest(mode = 'browse') {
             const selectedQuestions = getSelectedQuestionIds();
-            
+
             if (selectedQuestions.length === 0) {
                 alert('لطفا حداقل یک سوال را انتخاب کنید.');
                 return;
@@ -718,7 +818,7 @@ function openQuestionsModal() {
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = '../app/index.php';
-            
+
             // Add selected questions as hidden inputs
             selectedQuestions.forEach(questionId => {
                 const input = document.createElement('input');
@@ -727,21 +827,21 @@ function openQuestionsModal() {
                 input.value = questionId;
                 form.appendChild(input);
             });
-            
+
             // Add mode parameter
             const modeInput = document.createElement('input');
             modeInput.type = 'hidden';
             modeInput.name = 'mode';
             modeInput.value = mode;
             form.appendChild(modeInput);
-            
+
             // Add category info
             const categoryInput = document.createElement('input');
             categoryInput.type = 'hidden';
             categoryInput.name = selectedType === 'subcategory' ? 'subcategory_id' : 'category_id';
             categoryInput.value = selectedCategoryId;
             form.appendChild(categoryInput);
-            
+
             document.body.appendChild(form);
             form.submit();
         }
@@ -767,77 +867,71 @@ function openQuestionsModal() {
         }
 
         // Add click functionality to expandable category items
+        // Add click functionality to expandable category items
         document.querySelectorAll('.category-item.expandable').forEach(item => {
-            item.addEventListener('click', function(e) {
+            item.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                
+
                 const categoryId = this.getAttribute('data-category-id');
                 const categoryTitle = this.getAttribute('data-category-title');
                 const questionCount = parseInt(this.getAttribute('data-question-count'));
                 const subcategoriesDiv = document.getElementById('sub-' + categoryId);
-                
-                const isArrowClick = e.target.classList.contains('arrow') || 
-                                   e.target.closest('.arrow');
-                
-                if (isArrowClick && subcategoriesDiv) {
+
+                // همیشه دسته‌بندی را انتخاب کن
+                selectCategory(categoryId, categoryTitle, questionCount, 'category');
+
+                // اگر زیرمجموعه وجود دارد، آکاردئون را toggle کن
+                if (subcategoriesDiv) {
                     const isExpanded = subcategoriesDiv.classList.contains('expanded');
-                    
+
                     if (isExpanded) {
+                        // بستن
                         subcategoriesDiv.classList.remove('expanded');
                         this.classList.remove('expanded');
                     } else {
+                        // باز کردن (و بستن سایر آکاردئون‌ها)
                         closeAllAccordions();
-                        subcategoriesDiv.classList.add('expanded');
-                        this.classList.add('expanded');
-                    }
-                } else {
-                    selectCategory(categoryId, categoryTitle, questionCount, 'category');
-                    
-                    closeAllAccordions();
-                    
-                    if (subcategoriesDiv) {
                         subcategoriesDiv.classList.add('expanded');
                         this.classList.add('expanded');
                     }
                 }
             });
         });
-        
         // Add click functionality to subcategory items
         document.querySelectorAll('.subcategory-item').forEach(item => {
-            item.addEventListener('click', function(e) {
+            item.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                
+
                 const subcategoryId = this.getAttribute('data-subcategory-id');
                 const subcategoryTitle = this.getAttribute('data-subcategory-title');
                 const questionCount = parseInt(this.getAttribute('data-question-count'));
-                
+
                 selectCategory(subcategoryId, subcategoryTitle, questionCount, 'subcategory');
             });
         });
-        
+
         // Add click functionality to non-expandable category items
         document.querySelectorAll('.category-item:not(.expandable)').forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 const categoryId = this.getAttribute('data-category-id');
                 const categoryTitle = this.getAttribute('data-category-title');
                 const questionCount = parseInt(this.getAttribute('data-question-count'));
-                
+
                 selectCategory(categoryId, categoryTitle, questionCount, 'category');
             });
         });
-        
+
         // Add ripple effect to category items
         document.querySelectorAll('.category-item, .subcategory-item').forEach(item => {
-            item.addEventListener('click', function(e) {
+            item.addEventListener('click', function (e) {
                 const ripple = document.createElement('span');
                 const rect = this.getBoundingClientRect();
                 const size = Math.max(rect.width, rect.height);
                 const x = e.clientX - rect.left - size / 2;
                 const y = e.clientY - rect.top - size / 2;
-                
+
                 ripple.style.cssText = `
                     position: absolute;
                     border-radius: 50%;
@@ -850,17 +944,17 @@ function openQuestionsModal() {
                     top: ${y}px;
                     pointer-events: none;
                 `;
-                
+
                 this.style.position = 'relative';
                 this.style.overflow = 'hidden';
                 this.appendChild(ripple);
-                
+
                 setTimeout(() => {
                     ripple.remove();
                 }, 600);
             });
         });
-        
+
         // Add CSS for ripple animation
         const style = document.createElement('style');
         style.textContent = `
@@ -873,5 +967,5 @@ function openQuestionsModal() {
         `;
         document.head.appendChild(style);
     </script>
-    
+
 </div>

@@ -1,14 +1,5 @@
 <!-- Load Data Files -->
-<script src="data/1/tblCategories.js"></script>
-<script src="data/2/tblCategories.js"></script>
-<script src="data/1/tblClasses.js"></script>
-<script src="data/2/tblClasses.js"></script>
-<script src="data/1/tblQuestionInfos.js"></script>
-<script src="data/2/tblQuestionInfos.js"></script>
-<script src="data/1/tblQuestions.js"></script>
-<script src="data/2/tblQuestions.js"></script>
-<script src="data/1/tblSets.js"></script>
-<script src="data/2/tblSets.js"></script>
+
 <?php include("common/head.php"); ?>
 
 <!-- Layout wrapper -->
