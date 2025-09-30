@@ -1340,6 +1340,7 @@ $currentQuestion = $selectedQuestions[$currentQuestionIndex];
                 });
         }
 
+        // 8. به‌روزرسانی تابع checkBookmarkStatus:
         function checkBookmarkStatus(questionId) {
             fetch("../incloud/check_bookmark.php?question_id=" + questionId + "&csrf_token=" + encodeURIComponent(csrfToken))
                 .then(response => response.json())
@@ -2103,7 +2104,6 @@ $currentQuestion = $selectedQuestions[$currentQuestionIndex];
                 updatePracticeButtons();
             }
         }
-
         // 9. به‌روزرسانی تابع updateSession:
         function updateSession(questionId) {
             const formData = createFormDataWithCSRF({
@@ -2118,6 +2118,7 @@ $currentQuestion = $selectedQuestions[$currentQuestionIndex];
                 body: formData
             });
         }
+
 
         // Enhanced nextQuestion function to auto-skip problematic questions
         function nextQuestion() {

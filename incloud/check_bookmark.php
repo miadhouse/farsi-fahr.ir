@@ -3,7 +3,7 @@
 // اتصال به دیتابیس
 require_once __DIR__ . '/../config/config.php';
 // بررسی CSRF token
-if (!isset($_POST['csrf_token']) || empty($_POST['csrf_token'])) {
+if (!isset($_GET['csrf_token']) || empty($_GET['csrf_token'])) {
     echo json_encode([
         'success' => false,
         'message' => 'توکن امنیتی ارسال نشده است'
